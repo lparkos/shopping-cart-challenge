@@ -15,7 +15,7 @@ const ProductItem = ({ product, onAddToCartClicked }) => (
   <ProductTileStyle>
     <Product
       title={product.title}
-      price={product.price}
+      price={product.price.value}
       inventory={product.inventory}
      />
   </ProductTileStyle>
