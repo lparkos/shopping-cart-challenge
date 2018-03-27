@@ -1,19 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Product from './Product'
+import styled from 'styled-components';
+import { mediaSizes, device, colors } from '../styles/variables.js'
+
+const ProductTileStyle = styled.div`
+    background-color: white;
+    border-radius: 5px;
+    margin: 20px 0px;
+`;
 
 const ProductItem = ({ product, onAddToCartClicked }) => (
-  <div style={{ marginBottom: 20 }}>
+  <ProductTileStyle>
     <Product
       title={product.title}
       price={product.price}
-      inventory={product.inventory} />
-    <button
-      onClick={onAddToCartClicked}
-      disabled={product.inventory > 0 ? '' : 'disabled'}>
-      {product.inventory > 0 ? 'Add to cart' : 'Sold Out'}
-    </button>
-  </div>
+      inventory={product.inventory}
+     />
+  </ProductTileStyle>
 )
 
 ProductItem.propTypes = {
