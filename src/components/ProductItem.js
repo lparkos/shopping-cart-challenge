@@ -11,6 +11,7 @@ const ProductTileStyle = styled.div`
 `;
 
 const ProductItem = ({ product, onAddToCartClicked }) => (
+
   <ProductTileStyle>
     <Product
       title={product.title}
