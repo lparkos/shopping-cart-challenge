@@ -16,8 +16,9 @@
 //  });
 // }
 
+// import createFragment from 'react-addons-create-fragment';
 const url = "http://tech.work.co/shopping-cart/products.json";
-
+//
 const returnProducts = (url) => {
   const request = new XMLHttpRequest();
   request.open("GET", url, false);
@@ -31,10 +32,10 @@ const obj = JSON.parse(returnProducts(url));
 // const set = localStorage.setItem('obj', JSON.stringify(obj));
 // const get = localStorage.getItem('obj');
 
-// Test
-// console.log("__________");
-// console.log(obj);
-// console.log("__________");
+
+console.log("__________");
+console.log(obj);
+console.log("__________");
 
 const TIMEOUT = 100
 
