@@ -4,7 +4,7 @@ import ProductsList from './ProductsList'
 
 const setup = props => {
   const component = shallow(
-    <ProductsList title={props.title}>{props.children}</ProductsList>
+    <ProductsList title={props.productTitle}>{props.children}</ProductsList>
   )
 
   return {
