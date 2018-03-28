@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from '../components/Header'
 import ProductsContainer from './ProductsContainer'
-import CartContainer from './CartContainer'
 import styled from 'styled-components';
 import { mediaSizes, device, colors } from '../styles/variables.js'
 
@@ -27,8 +26,6 @@ const App = () => (
     <Header />
     <hr/>
     <ProductsContainer />
-    <hr/>
-    <CartContainer />
   </AppStyle>
 )
 

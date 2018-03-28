@@ -3,6 +3,37 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components';
 import { device, colors } from '../styles/variables.js'
 
+const Product = ({ price, inventory, title, onAddToCartClicked, product }) => (
+  <ProductStyle>
+    <Col1 src="http://via.placeholder.com/455x303" />
+    <Col2>
+      <Td>
+        <Title>{title}</Title>
+        <Inventory>{inventory ? `${inventory} Remaining` : null}</Inventory>
+        <ButtonStyle
+          onClick={onAddToCartClicked}
+          disabled={inventory > 0 ? '' : 'disabled'}>
+          {inventory > 0 ? 'Add to cart' : 'Sold Out'}
+        </ButtonStyle>
+      </Td>
+      <Td>
+        <Price>{price}</Price>
+      </Td>
+    </Col2>
+  </ProductStyle>
+)
+
+Product.propTypes = {
+  product: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    inventory: PropTypes.number.isRequired
+  }).isRequired,
+  onAddToCartClicked: PropTypes.func.isRequired
+}
+
+export default Product
+
 const ProductStyle = styled.div`
   @media ${device.smallSz} {
     display: block;
@@ -111,41 +142,3 @@ const ButtonStyle = styled.button`
       }
     }
 `;
-
-const Product = ({ price, inventory, title, onAddToCartClicked, product }) => (
-  <ProductStyle>
-    <Col1 src="http://via.placeholder.com/455x303" />
-    <Col2>
-      <Td>
-        <Title>{title}</Title>
-        <Inventory>{inventory ? `${inventory} Remaining` : null}</Inventory>
-        <ButtonStyle
-          onClick={onAddToCartClicked}
-          disabled={inventory > 0 ? '' : 'disabled'}>
-          {inventory > 0 ? 'Add to cart' : 'Sold Out'}
-        </ButtonStyle>
-      </Td>
-      <Td>
-        <Price>{price}</Price>
-      </Td>
-    </Col2>
-  </ProductStyle>
-)
-
-// Product.propTypes = {
-//   price: PropTypes.number,
-//   inventory: PropTypes.number,
-//   title: PropTypes.string,
-//   onAddToCartClicked: PropTypes.func.isRequired
-// }
-
-Product.propTypes = {
-  product: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    inventory: PropTypes.number.isRequired
-  }).isRequired,
-  onAddToCartClicked: PropTypes.func.isRequired
-}
-
-export default Product

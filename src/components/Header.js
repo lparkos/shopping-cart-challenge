@@ -1,14 +1,33 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components';
-import { mediaSizes, device } from '../styles/variables.js'
+import CartContainer from '../containers/CartContainer'
 
-const Header = () => (
-  <div>
-    <h3>Acme Store</h3>
-    <div>Your cart is empty</div>
-    <img src="http://via.placeholder.com/50x30"/>
-  </div>
-)
+export default class Header extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      showModal:false
+    }
+  }
 
-export default Header
+  propTypes = {
+    products: PropTypes.array
+  }
+
+  onClick(e){
+    e.preventDefault();
+    this.setState({showModal: !this.state.showModal})
+  }
+
+  render(){
+    return(
+      <div>
+        <h3>Acme Store</h3>
+        <a onClick={this.onClick.bind(this)}>
+          <img src="http://via.placeholder.com/50x30" alt="cart"/>
+        </a>
+        {this.state.showModal && <CartContainer />}
+      </div>
+    )
+  }
+}

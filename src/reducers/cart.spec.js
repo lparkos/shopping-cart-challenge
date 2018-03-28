@@ -4,11 +4,16 @@ describe('reducers', () => {
   describe('cart', () => {
     const initialState = {
       addedIds: [],
-      quantityById: {}
+      quantityById: {},
+      closeModal: false
     }
 
     it('should provide the initial state', () => {
       expect(cart(undefined, {})).toEqual(initialState)
+    })
+
+    it('should handle CLOSE_MODAL action', () => {
+      expect(cart({}, { type: 'CLOSE_MODAL' })).toEqual(initialState)
     })
 
     it('should handle CHECKOUT_REQUEST action', () => {

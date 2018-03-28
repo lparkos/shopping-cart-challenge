@@ -13,5 +13,6 @@ export const device = {
 export const colors = {
   gray:  '#F4F5F7',
   darkGray: '#939393',
+  medGray: '#dedede',
   blue: '#5E97D1'
 }

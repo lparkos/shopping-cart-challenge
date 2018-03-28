@@ -1,12 +1,23 @@
 import {
   ADD_TO_CART,
   CHECKOUT_REQUEST,
-  CHECKOUT_FAILURE
+  CHECKOUT_FAILURE,
+  CLOSE_MODAL
 } from '../constants/ActionTypes'
 
 const initialState = {
   addedIds: [],
-  quantityById: {}
+  quantityById: {},
+  closeModal:false
+}
+
+const closeModal = (state = initialState.closeModal, action) => {
+  switch (action.type) {
+    case CLOSE_MODAL:
+      return !state.closeModal;
+    default:
+      return state
+  }
 }
 
 const addedIds = (state = initialState.addedIds, action) => {
