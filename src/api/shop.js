@@ -3,22 +3,49 @@
  */
 // import _products from './products.json'
 
-// Had difficulties getting promise to return anything but pending
-// const returnProducts = () => {
+// Had difficulties getting fetch/async/await ways of getting data to work
+// the exported property.
+//
+// Fetch with stringify
+// let returnProducts = () => {
 //  return fetch('http://tech.work.co/shopping-cart/products.json')
 //  .then((response) => response.json())
-//  .then((responseJson) => {
-//    console.log("I'm here!");
-//    console.log(responseJson.id);
+//  .then((data) => {
+//    const json = JSON.stringify(data);
+//    return json;
 //  })
 //  .catch((error) => {
 //    console.error(error);
 //  });
 // }
-
-// import createFragment from 'react-addons-create-fragment';
-const url = "http://tech.work.co/shopping-cart/products.json";
 //
+// Fetch with promises
+// const returnProducts = () => {
+//  return fetch('http://tech.work.co/shopping-cart/products.json')
+//  .then((response) => response.json())
+//  .then((json) => {
+//    return json
+//  })
+//  .catch((error) => {
+//    console.error(error);
+//  });
+// }
+//
+// let returnProducts = () => {
+//  return fetch('http://tech.work.co/shopping-cart/products.json')
+//   .then((response) => {
+//     response.json().then(body => console.log(body))
+//   })
+// }
+//
+const url = "http://tech.work.co/shopping-cart/products.json";
+
+// Trying with await/async
+// const returnProducts = async () => {
+//   const response = await fetch(`http://tech.work.co/shopping-cart/products.json`)
+//   const json = await response.json();
+// }
+
 const returnProducts = (url) => {
   const request = new XMLHttpRequest();
   request.open("GET", url, false);
@@ -26,20 +53,16 @@ const returnProducts = (url) => {
   return request.responseText;
 }
 
-const obj = JSON.parse(returnProducts(url));
-
-// Set to local storage for testing
-// const set = localStorage.setItem('obj', JSON.stringify(obj));
-// const get = localStorage.getItem('obj');
+const returnedObj = JSON.parse(returnProducts(url));
 
 
 console.log("__________");
-console.log(obj);
+console.log(returnProducts());
 console.log("__________");
 
 const TIMEOUT = 100
 
 export default {
-  getProducts: (cb, timeout) => setTimeout(() => cb(obj), timeout || TIMEOUT),
+  getProducts: (cb, timeout) => setTimeout(() => cb(returnedObj), timeout || TIMEOUT),
   buyProducts: (payload, cb, timeout) => setTimeout(() => cb(), timeout || TIMEOUT)
 }
