@@ -1,7 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Product from './Product'
+import { connect } from 'react-redux'
 import styled from 'styled-components';
+import { addToCart } from '../actions'
+import { getVisibleProducts } from '../reducers/products'
 import { mediaSizes, device, colors } from '../styles/variables.js'
 
 const ProductTileStyle = styled.div`
@@ -10,13 +13,14 @@ const ProductTileStyle = styled.div`
     margin: 20px 0px;
 `;
 
-const ProductItem = ({ product, onAddToCartClicked }) => (
+const ProductItem = ({ product, addToCart }) => (
 
   <ProductTileStyle>
     <Product
-      title={product.title}
+      title={product.productTitle}
       price={product.price.value}
       inventory={product.inventory}
+      onAddToCartClicked={() => addToCart(product.id)}
      />
   </ProductTileStyle>
 )
@@ -30,4 +34,11 @@ ProductItem.propTypes = {
   onAddToCartClicked: PropTypes.func.isRequired
 }
 
-export default ProductItem
+const mapStateToProps = state => ({
+  products: getVisibleProducts(state.products)
+})
+
+export default connect(
+  mapStateToProps,
+  { addToCart }
+)(ProductItem)

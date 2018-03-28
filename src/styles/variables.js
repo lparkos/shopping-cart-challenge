@@ -1,6 +1,6 @@
 export const mediaSize = {
   smallSz: '320px',
-  mediumSz: '800px',
+  mediumSz: '600px',
   largeSz: '1200px',
 }
 
@@ -12,5 +12,6 @@ export const device = {
 
 export const colors = {
   gray:  '#F4F5F7',
+  darkGray: '#939393',
   blue: '#5E97D1'
 }

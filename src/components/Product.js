@@ -43,15 +43,42 @@ const Td = styled.div`
 
 
 const Title = styled.div`
-  display: inline;
+  @media ${device.smallSz} {
+    display: inline;
+    font-size: 21px;
+  }
+  @media ${device.mediumSz}, @media ${device.largeSz} {
+    display: inline;
+    font-size: 38px;
+  }
 `;
 
 const Inventory = styled.div`
-  display: inline;
+@media ${device.smallSz} {
+    display: block;
+    font-size: 12px;
+    padding-top: 1em;
+    text-transform: uppercase;
+    color: ${colors.darkGray};
+  }
+  @media ${device.mediumSz}, @media ${device.largeSz} {
+    display: block;
+    font-size: 13px;
+    padding-top: 1em;
+    text-transform: uppercase;
+    color: ${colors.darkGray};
+  }
 `;
 
 const Price = styled.div`
-  display: inline;
+  @media ${device.smallSz} {
+    display: inline;
+    font-size: 16px;
+  }
+  @media ${device.mediumSz}, @media ${device.largeSz} {
+    display: inline;
+    font-size: 21px;
+  }
 `;
 
 const ButtonStyle = styled.button`
@@ -85,13 +112,13 @@ const ButtonStyle = styled.button`
     }
 `;
 
-const Product = ({ price, inventory, title, onAddToCartClicked }) => (
+const Product = ({ price, inventory, title, onAddToCartClicked, product }) => (
   <ProductStyle>
     <Col1 src="http://via.placeholder.com/455x303" />
     <Col2>
       <Td>
         <Title>{title}</Title>
-        <Inventory>{inventory ? ` x ${inventory}` : null}</Inventory>
+        <Inventory>{inventory ? `${inventory} Remaining` : null}</Inventory>
         <ButtonStyle
           onClick={onAddToCartClicked}
           disabled={inventory > 0 ? '' : 'disabled'}>
@@ -105,10 +132,20 @@ const Product = ({ price, inventory, title, onAddToCartClicked }) => (
   </ProductStyle>
 )
 
+// Product.propTypes = {
+//   price: PropTypes.number,
+//   inventory: PropTypes.number,
+//   title: PropTypes.string,
+//   onAddToCartClicked: PropTypes.func.isRequired
+// }
+
 Product.propTypes = {
-  price: PropTypes.number,
-  inventory: PropTypes.number,
-  title: PropTypes.string
+  product: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    inventory: PropTypes.number.isRequired
+  }).isRequired,
+  onAddToCartClicked: PropTypes.func.isRequired
 }
 
 export default Product

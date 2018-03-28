@@ -55,11 +55,6 @@ const returnProducts = (url) => {
 
 const returnedObj = JSON.parse(returnProducts(url));
 
-
-console.log("__________");
-console.log(returnProducts());
-console.log("__________");
-
 const TIMEOUT = 100
 
 export default {
