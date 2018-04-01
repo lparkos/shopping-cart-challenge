@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Product from './Product'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { closeModal } from '../reducers/cart'
+import { quantityById } from '../reducers/'
 import { device, colors } from '../styles/variables.js'
 
 class Cart extends React.Component {
@@ -14,10 +14,22 @@ class Cart extends React.Component {
     };
   }
 
-  onClick(e){
+  getTotal = () => {
+    this.props.dispatch({ type: 'GET_TOTAL' })
+  }
+
+  closeModal(e){
     e.preventDefault();
     this.setState({closeModal: !this.state.closeModal})
   }
+
+  // increaseQuant(e){
+  //   this.setState({ increase: this.state.quantity + 1 })
+  // }
+  //
+  // decreaseQuant(e){
+  //   this.setState({ decrease: this.state.quantity - 1 })
+  // }
 
   render(){
     const hasProducts = this.props.products.length > 0
@@ -41,12 +53,10 @@ class Cart extends React.Component {
               <Title>Your Cart</Title>
               <hr/>
               <div>{nodes}</div>
-              <p>Total: &#36;{this.props.total}</p>
-              <button onClick={this.props.onCheckoutClicked}
-                disabled={hasProducts ? '' : 'disabled'}>
-                Checkout
-              </button>
-              <button onClick={this.onClick.bind(this)}>X</button>
+              <p>Total: &#36;{this.getTotal}</p>
+              <button onClick={this.closeModal.bind(this)}>X</button>
+              <button onClick={this.increaseQuant.bind(this)}>+</button>
+              <button onClick={this.decreaseQuant.bind(this)}></button>
             </CartModalStyle>
           </CartStyleBackground>
         }
@@ -55,10 +65,22 @@ class Cart extends React.Component {
   }
 }
 
-Cart.propTypes = {
+// Cart.propTypes = {
+//   products: PropTypes.array,
+//   total: PropTypes.string,
+//   onCheckoutClicked: PropTypes.func
+// }
+
+Product.propTypes = {
   products: PropTypes.array,
   total: PropTypes.string,
-  onCheckoutClicked: PropTypes.func
+  onCheckoutClicked: PropTypes.func,
+  product: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    inventory: PropTypes.number.isRequired,
+  }).isRequired,
+  onAddToCartClicked: PropTypes.func.isRequired
 }
 
 export default connect()(Cart)

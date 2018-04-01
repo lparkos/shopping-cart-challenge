@@ -2,7 +2,8 @@ import {
   ADD_TO_CART,
   CHECKOUT_REQUEST,
   CHECKOUT_FAILURE,
-  CLOSE_MODAL
+  CLOSE_MODAL,
+  GET_QUANTITY
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -44,8 +45,15 @@ const quantityById = (state = initialState.quantityById, action) => {
   }
 }
 
-export const getQuantity = (state, productId) =>
-  state.quantityById[productId] || 0
+export const getQuantity = (state, productId) => {
+  switch (action.type) {
+    case GET_QUANTITY:
+      return state.quantityById[productId] || 0
+
+    default:
+      return state;
+  }
+}
 
 export const getAddedIds = state => state.addedIds
 
