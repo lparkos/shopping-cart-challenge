@@ -9,6 +9,7 @@ const CartContainer = ({ products, total, checkout, getTotal, getQuantity }) => 
   <Cart
     products={products}
     total={getTotal}
+    // I know that I have to pass down props for my dummy component to respond.
     quantityById={getQuantity}
     onCheckoutClicked={() => checkout(products)} />
 )

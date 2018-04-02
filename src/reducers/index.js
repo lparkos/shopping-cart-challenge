@@ -11,6 +11,7 @@ export default combineReducers({
 const getAddedIds = state => fromCart.getAddedIds(state.cart)
 const getProduct = (state, id) => fromProducts.getProduct(state.products, id)
 
+// I'm not sure which reducers need to emit actions and which one need to perform functions. 
 export const getQuantity = (state, id) => fromCart.getQuantity(state.cart, id)
 
 export const getTotal = state =>

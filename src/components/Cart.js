@@ -16,6 +16,9 @@ class Cart extends React.Component {
     };
   }
 
+  // I'm not sure how to dispatch or pass through actions.
+  // Part of the problem is that I've converted this component into a stateful component, and I'm not sure how to pass through actions to act on. \
+  // 
   closeModal(e){
     e.preventDefault();
     this.setState({closeModal: !this.state.closeModal})
