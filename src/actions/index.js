@@ -1,9 +1,12 @@
 import shop from '../api/shop'
 import * as types from '../constants/ActionTypes'
 
-export const getQuant = () => ({
-  type: types.GET_QUANTITY
-})
+// export const getQuant = () => ({
+//   dispatch({
+//     type: types.GET_QUANTITY
+//     quantity: quantity
+//   })
+// })
 
 const receiveProducts = products => ({
   type: types.RECEIVE_PRODUCTS,

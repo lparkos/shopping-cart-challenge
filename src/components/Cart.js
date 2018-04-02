@@ -3,19 +3,17 @@ import PropTypes from 'prop-types'
 import Product from './Product'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { quantityById } from '../reducers/'
+import { quantityById, getCartProducts } from '../reducers/'
 import { device, colors } from '../styles/variables.js'
 
 class Cart extends React.Component {
   constructor() {
     super();
     this.state = {
-      closeModal:true
+      closeModal:true,
+      quantity: 0,
+      inventory: ""
     };
-  }
-
-  getTotal = () => {
-    this.props.dispatch({ type: 'GET_TOTAL' })
   }
 
   closeModal(e){
@@ -23,13 +21,17 @@ class Cart extends React.Component {
     this.setState({closeModal: !this.state.closeModal})
   }
 
-  // increaseQuant(e){
-  //   this.setState({ increase: this.state.quantity + 1 })
-  // }
-  //
-  // decreaseQuant(e){
-  //   this.setState({ decrease: this.state.quantity - 1 })
-  // }
+  increaseQuant(e){
+    this.setState({ quantity: this.state.quantity + 1 })
+  }
+
+  decreaseQuant(e){
+    this.setState({ quantity: this.state.quantity - 1 })
+  }
+
+  removeProduct(e){
+    this.setState({ inventory: this.state.inventory - 1 })
+  }
 
   render(){
     const hasProducts = this.props.products.length > 0
@@ -53,10 +55,12 @@ class Cart extends React.Component {
               <Title>Your Cart</Title>
               <hr/>
               <div>{nodes}</div>
-              <p>Total: &#36;{this.getTotal}</p>
+              <p>Total: &#36;{this.props.total}</p>
+              <p>Quantity:{this.state.quantity}</p>
               <button onClick={this.closeModal.bind(this)}>X</button>
               <button onClick={this.increaseQuant.bind(this)}>+</button>
-              <button onClick={this.decreaseQuant.bind(this)}></button>
+              <button onClick={this.decreaseQuant.bind(this)}>-</button>
+              <button onClick={this.removeProduct.bind(this)}>Remove Product</button>
             </CartModalStyle>
           </CartStyleBackground>
         }
@@ -65,22 +69,11 @@ class Cart extends React.Component {
   }
 }
 
-// Cart.propTypes = {
-//   products: PropTypes.array,
-//   total: PropTypes.string,
-//   onCheckoutClicked: PropTypes.func
-// }
-
-Product.propTypes = {
+Cart.propTypes = {
   products: PropTypes.array,
   total: PropTypes.string,
-  onCheckoutClicked: PropTypes.func,
-  product: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    inventory: PropTypes.number.isRequired,
-  }).isRequired,
-  onAddToCartClicked: PropTypes.func.isRequired
+  quantity: PropTypes.number,
+  onCheckoutClicked: PropTypes.func
 }
 
 export default connect()(Cart)

@@ -8,8 +8,7 @@ import {
 
 const initialState = {
   addedIds: [],
-  quantityById: {},
-  closeModal:false
+  quantityById: {}
 }
 
 const closeModal = (state = initialState.closeModal, action) => {
@@ -45,15 +44,18 @@ const quantityById = (state = initialState.quantityById, action) => {
   }
 }
 
-export const getQuantity = (state, productId) => {
-  switch (action.type) {
-    case GET_QUANTITY:
-      return state.quantityById[productId] || 0
+export const getQuantity = (state, productId) =>
+  state.quantityById[productId] || 0
 
-    default:
-      return state;
-  }
-}
+// export const getQuantity = (state, productId) => {
+//   switch (action.type) {
+//     case GET_QUANTITY:
+//       return state.quantityById[productId] || 0
+//
+//     default:
+//       return state;
+//   }
+// }
 
 export const getAddedIds = state => state.addedIds
 
@@ -62,6 +64,8 @@ const cart = (state = initialState, action) => {
     case CHECKOUT_REQUEST:
       return initialState
     case CHECKOUT_FAILURE:
+      return action.cart
+    case GET_QUANTITY:
       return action.cart
     default:
       return {
